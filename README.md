@@ -4,11 +4,12 @@
 The DEER Debt Tracker is a mobile-first application designed to solve the problem of manual debt recording for small business owners. It provides a lightweight, offline-capable solution to manage customer profiles, track transaction histories, and monitor unpaid balances directly from an Android device. 
 <br><br>
 ## **System Features**
-   * **Offline Data Persistence**: Operates without internet using a local JSON-based storage system[cite: 27, 128].
-   * **Customer Management**: Create profiles with names, phone numbers, and addresses[cite: 58, 60, 61].
-   * **Debt Recording**: Link multiple transaction entries to a single customer profile[cite: 52, 65].
-   * **Native Integration**: Includes a direct dialer feature to call customers from their profile[cite: 11, 21].
-   * **Search & Filter**: Real-time filtering to quickly find specific customer records[cite: 11, 14].
+   * **Offline Data Persistence**: Operates without internet using a local JSON-based storage system.
+   * **Customer Management**: Create profiles with names, phone numbers, and addresses.
+   * **Debt Recording**: Link multiple transaction entries to a single customer profile.
+   * **Native Integration**: Includes a direct dialer feature to call customers from their profile.
+   * **Search & Filter**: Real-time filtering to quickly find specific customer records.
+<br><br>
 ## **Project Directory Structure**
 <br><br>
 The repository is organized to be modular and easy to navigate:
