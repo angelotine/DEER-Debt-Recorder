@@ -26,8 +26,7 @@ The repository is organized to be modular and easy to navigate:
 <br><br>         
 
 # **Getting Started**
-<br><br>
-
+<br>
 To get a local copy up and running, follow these steps:
 
 Clone the Repository:
