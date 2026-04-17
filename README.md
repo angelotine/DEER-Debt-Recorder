@@ -23,7 +23,7 @@ The repository is organized to be modular and easy to navigate:
 
    `buildozer.spec`: Configuration file for packaging the app into an Android APK.
   
-
+         
   
 **Getting Started**
 
