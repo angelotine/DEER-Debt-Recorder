@@ -1,0 +1,63 @@
+#:kivy 2.3.0
+
+<PaidHistoryScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0.95, 0.95, 0.95, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Header
+        BoxLayout:
+            size_hint_y: None
+            height: '65dp'
+            padding: [dp(10), 0]
+            canvas.before:
+                Color:
+                    rgba: (0.25, 0.25, 0.25, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Button:
+                text: '<'
+                size_hint_x: None
+                width: '50dp'
+                background_normal: ''
+                background_color: (0, 0, 0, 0)
+                font_size: '22sp'
+                on_release: 
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'home'
+            Label:
+                text: 'History'
+                bold: True
+                font_size: '20sp'
+                halign: 'left'
+                text_size: self.width, None
+
+        # Search
+        BoxLayout:
+            size_hint_y: None
+            height: '70dp'
+            padding: dp(12)
+            TextInput:
+                id: search_input
+                hint_text: 'Search history...'
+                multiline: False
+                on_text: root.update_list(self.text)
+                padding: [dp(10), dp(10)]
+
+        RecycleView:
+            id: rv
+            viewclass: 'SelectableButton'
+            RecycleBoxLayout:
+                default_size: None, dp(120)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(10)
+                padding: dp(12)
