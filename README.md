@@ -31,10 +31,10 @@ buildozer.spec: Configuration file for packaging the app into an Android APK.
 To get a local copy up and running, follow these steps:
 
 Clone the Repository:
-Bashgit clone https://github.com/yourusername/deer-tracker.git
+git clone https://github.com/yourusername/deer-tracker.git
 
 Install Dependencies:
-Bashpip install -r requirements.txt
+pip install -r requirements.txt
 
 Run the Application:
-Bashpython main.py
+python main.py
