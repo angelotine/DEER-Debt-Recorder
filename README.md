@@ -27,7 +27,7 @@ To get a local copy up and running, follow these steps:
 
 **Clone the Repository:**
 
-   git clone https://github.com/yourusername/deer-tracker.git 
+   git clone (https://github.com/angelotine/DEER-Debt-Recorder)
 
 **Install Dependencies:**
 
