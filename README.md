@@ -11,7 +11,6 @@ The DEER Debt Tracker is a mobile-first application designed to solve the proble
    * **Search & Filter**: Real-time filtering to quickly find specific customer records.
 <br><br>
 ## **Project Directory Structure**
-<br><br>
 The repository is organized to be modular and easy to navigate:
 
    `assets/`: Contains app icons and visual resources.
