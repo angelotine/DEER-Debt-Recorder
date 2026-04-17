@@ -6,7 +6,7 @@ The DEER Debt Tracker is a mobile-first application designed to solve the proble
 
 The repository is organized to be modular and easy to navigate:
 
-assets/: Contains app icons and visual resources.
+`assets/:` Contains app icons and visual resources.
 
 kv_files/: Stores the Kivy design language files for the UI layout.
 
