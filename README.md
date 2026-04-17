@@ -23,6 +23,7 @@ requirements.txt: Lists all Python dependencies needed to run the app.
 buildozer.spec: Configuration file for packaging the app into an Android APK.
 
 
+
 **Getting Started**
 
 
