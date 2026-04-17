@@ -21,9 +21,7 @@ The repository is organized to be modular and easy to navigate:
    `requirements.txt`: Lists all Python dependencies needed to run the app.
 
    `buildozer.spec`: Configuration file for packaging the app into an Android APK.
-  
 <br><br>         
-
 ## **Getting Started**
 To get a local copy up and running, follow these steps:
 
