@@ -32,12 +32,11 @@ To get a local copy up and running, follow these steps:
 
 Clone the Repository:
 
-git clone https://github.com/yourusername/deer-tracker.git 
+   git clone https://github.com/yourusername/deer-tracker.git 
 
 Install Dependencies:
 
-pip install -r `requirements.txt`
+   pip install -r `requirements.txt`
 
 Run the Application:
-
-`python main.py`
+   `python main.py`
