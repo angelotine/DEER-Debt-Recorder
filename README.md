@@ -25,14 +25,14 @@ The repository is organized to be modular and easy to navigate:
 ## **Getting Started**
 To get a local copy up and running, follow these steps:
 
-Clone the Repository:
+**Clone the Repository:**
 
    git clone https://github.com/yourusername/deer-tracker.git 
 
-Install Dependencies:
+**Install Dependencies:**
 
    pip install -r `requirements.txt`
 
-Run the Application:
+**Run the Application:**
 
    `python main.py`
