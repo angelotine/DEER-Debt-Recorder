@@ -3,42 +3,61 @@
 <SelectableButton>:
     address_text: ""
     debt_text: ""
+    markup: True
+    color: (0, 0, 0, 0)
     canvas.before:
         Color:
-            rgba: (1, 1, 1, 1) if self.state == 'normal' else (0.92, 0.92, 0.92, 1)
+            rgba: (0.11, 0.15, 0.21, 1) if self.state == 'normal' else (0.15, 0.20, 0.28, 1)
         RoundedRectangle:
-            pos: (self.x + dp(10), self.y + dp(5))
-            size: (self.width - dp(20), self.height - dp(10))
-            radius: [dp(12),]
+            pos: (self.x + dp(8), self.y + dp(4))
+            size: (self.width - dp(16), self.height - dp(8))
+            radius: [dp(14),]
+        Color:
+            rgba: (0.22, 0.58, 0.27, 1) if root.debt_text != "SETTLED" else (0.35, 0.40, 0.50, 1)
+        RoundedRectangle:
+            pos: (self.x + dp(8), self.y + dp(4))
+            size: (dp(4), self.height - dp(8))
+            radius: [dp(14), 0, 0, dp(14)]
+        Color:
+            rgba: (1, 1, 1, 0.03)
+        RoundedRectangle:
+            pos: (self.x + dp(8), self.y + self.height * 0.5)
+            size: (self.width - dp(16), self.height * 0.5 - dp(4))
+            radius: [0, 0, dp(14), dp(14)]
     background_normal: ''
     background_color: (0, 0, 0, 0)
-    
+
     BoxLayout:
         orientation: 'horizontal'
-        padding: [dp(20), dp(10)]
-        spacing: dp(10)
+        padding: [dp(22), dp(12), dp(12), dp(12)]
+        spacing: dp(12)
         pos: root.pos
         size: root.size
 
         BoxLayout:
             orientation: 'vertical'
+            spacing: dp(3)
+
             Label:
                 text: root.text
                 markup: True
-                color: (0.1, 0.1, 0.1, 1)
+                color: (0.92, 0.94, 0.97, 1)
                 halign: 'left'
                 text_size: self.width, None
                 font_size: '16sp'
+                bold: True
+
             Label:
                 text: root.address_text
-                color: (0.4, 0.4, 0.4, 1)
+                color: (0.45, 0.52, 0.62, 1)
                 halign: 'left'
                 text_size: self.width, None
-                font_size: '13sp'
+                font_size: '12sp'
+
             Label:
                 text: root.debt_text
                 markup: True
-                color: (0.18, 0.49, 0.2, 1) if root.debt_text != "SETTLED" else (0.4, 0.4, 0.4, 1)
+                color: (0.30, 0.75, 0.38, 1) if root.debt_text != "SETTLED" else (0.45, 0.52, 0.62, 1)
                 halign: 'left'
                 text_size: self.width, None
                 font_size: '15sp'
@@ -46,83 +65,162 @@
 
         BoxLayout:
             size_hint_x: None
-            width: dp(150) if root.debt_text == "SETTLED" else dp(80)
-            spacing: dp(8)
+            width: dp(150) if root.debt_text == "SETTLED" else dp(75)
+            spacing: dp(6)
             pos_hint: {'center_y': 0.5}
+            orientation: 'vertical'
 
             Button:
                 text: 'DEL'
-                size_hint: (1, None)
-                height: dp(45)
+                size_hint_y: None
+                height: dp(38)
                 background_normal: ''
-                background_color: (0.8, 0.2, 0.2, 1) if self.state == 'normal' else (0.5, 0.1, 0.1, 1)
+                background_color: (0, 0, 0, 0)
                 bold: True
+                font_size: '12sp'
+                color: (0.90, 0.35, 0.35, 1)
                 opacity: 1 if root.debt_text == "SETTLED" else 0
                 disabled: True if root.debt_text != "SETTLED" else False
                 on_release: root.confirm_delete()
+                canvas.before:
+                    Color:
+                        rgba: (0.35, 0.12, 0.12, 1) if self.state == 'normal' else (0.45, 0.16, 0.16, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(8),]
+                    Color:
+                        rgba: (0.75, 0.22, 0.22, 0.5)
+                    Line:
+                        rounded_rectangle: (self.x, self.y, self.width, self.height, dp(8))
+                        width: dp(1)
 
             Button:
                 text: 'UNPAID' if root.debt_text == "SETTLED" else 'PAID'
-                size_hint: (1, None)
-                height: dp(45)
+                size_hint_y: None
+                height: dp(38)
                 background_normal: ''
-                background_color: ((0.7, 0.4, 0.1, 1) if root.debt_text == "SETTLED" else (0.18, 0.49, 0.2, 1)) if self.state == 'normal' else (0.1, 0.2, 0.1, 1)
+                background_color: (0, 0, 0, 0)
                 bold: True
-                on_release: 
+                font_size: '12sp'
+                color: (1, 1, 1, 1)
+                on_release:
                     if root.debt_text == "SETTLED": root.mark_as_unpaid()
                     else: root.mark_as_paid()
+                canvas.before:
+                    Color:
+                        rgba: (0.55, 0.32, 0.08, 1) if root.debt_text == "SETTLED" else (0.16, 0.44, 0.20, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(8),]
 
 <DebtListScreen>:
     BoxLayout:
         orientation: 'vertical'
         canvas.before:
             Color:
-                rgba: (0.95, 0.95, 0.95, 1)
+                rgba: (0.07, 0.09, 0.13, 1)
             Rectangle:
                 pos: self.pos
                 size: self.size
+
+        # Header
         BoxLayout:
             size_hint_y: None
-            height: '65dp'
-            padding: [dp(10), 0]
+            height: dp(65)
+            padding: [dp(8), dp(10), dp(16), dp(10)]
+            spacing: dp(4)
             canvas.before:
                 Color:
-                    rgba: (0.18, 0.49, 0.2, 1)
+                    rgba: (0.10, 0.13, 0.19, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                Color:
+                    rgba: (0.22, 0.58, 0.27, 1)
+                Rectangle:
+                    pos: (self.x, self.y)
+                    size: (self.width, dp(2))
+
             Button:
-                text: '<'
+                text: '‹'
                 size_hint_x: None
-                width: '50dp'
+                width: dp(44)
                 background_normal: ''
                 background_color: (0, 0, 0, 0)
-                font_size: '22sp'
-                on_release: 
+                font_size: '28sp'
+                color: (0.60, 0.65, 0.75, 1)
+                on_release:
                     root.manager.transition.direction = 'right'
                     root.manager.current = 'home'
+
             Label:
                 text: 'Active Debts'
                 bold: True
-                font_size: '20sp'
+                font_size: '19sp'
+                color: (0.92, 0.94, 0.97, 1)
+                halign: 'left'
+                text_size: self.width, None
+
+            Label:
+                size_hint_x: None
+                width: dp(30)
+                text: ''
+
+        # Search bar
         BoxLayout:
             size_hint_y: None
-            height: '65dp'
-            padding: dp(10)
+            height: dp(60)
+            padding: [dp(14), dp(10)]
+            canvas.before:
+                Color:
+                    rgba: (0.09, 0.12, 0.17, 1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
             TextInput:
                 id: search_input
-                hint_text: 'Search customer name...'
+                hint_text: '  🔍  Search customer name...'
                 multiline: False
                 on_text: root.update_list(self.text)
-                padding: [dp(10), dp(10)]
+                padding: [dp(14), dp(10)]
+                background_normal: ''
+                background_color: (0.13, 0.17, 0.24, 1)
+                foreground_color: (0.88, 0.91, 0.95, 1)
+                hint_text_color: (0.35, 0.42, 0.52, 1)
+                cursor_color: (0.22, 0.58, 0.27, 1)
+                font_size: '14sp'
+                canvas.after:
+                    Color:
+                        rgba: (0.22, 0.58, 0.27, 0.6)
+                    Line:
+                        rounded_rectangle: (self.x, self.y, self.width, self.height, dp(10))
+                        width: dp(1.2)
+
+        # Empty state
+        Label:
+            size_hint_y: None
+            height: dp(80) if not rv.data else 0
+            opacity: 1 if not rv.data else 0
+            text: 'No active debts.' if not rv.data else ''
+            color: (0.35, 0.42, 0.52, 1)
+            font_size: '14sp'
+            halign: 'center'
+
+        # List
         RecycleView:
             id: rv
             viewclass: 'SelectableButton'
+            bar_width: dp(3)
+            bar_color: (0.22, 0.58, 0.27, 0.5)
+            bar_inactive_color: (0.22, 0.58, 0.27, 0.15)
             RecycleBoxLayout:
-                default_size: None, dp(115)
+                default_size: None, dp(110)
                 default_size_hint: 1, None
                 size_hint_y: None
                 height: self.minimum_height
                 orientation: 'vertical'
-                spacing: dp(10)
-                padding: dp(12)
+                spacing: dp(6)
+                padding: [dp(10), dp(10)]
