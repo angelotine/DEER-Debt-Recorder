@@ -31,11 +31,12 @@ class Order:
 class Customer:
     name: str
     phone: str
-    address: str = ""  # Added address field
+    address: str = ""  
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
     orders: List[Order] = field(default_factory=list)
 
     def unpaid_total(self) -> float:
+        """Calculates the total of all orders where is_paid is False."""
         return sum(order.amount for order in self.orders if not order.is_paid)
 
     def to_dict(self):
@@ -43,7 +44,7 @@ class Customer:
             "id": self.id,
             "name": self.name,
             "phone": self.phone,
-            "address": self.address, # Save address
+            "address": self.address,
             "orders": [o.to_dict() for o in self.orders]
         }
 
@@ -52,7 +53,7 @@ class Customer:
         cust = Customer(
             name=data["name"],
             phone=data["phone"],
-            address=data.get("address", ""), # Load address
+            address=data.get("address", ""),
             id=data.get("id", str(uuid.uuid4()))
         )
         cust.orders = [Order.from_dict(o) for o in data.get("orders", [])]
