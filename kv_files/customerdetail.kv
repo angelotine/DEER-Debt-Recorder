@@ -5,147 +5,329 @@
         orientation: 'vertical'
         canvas.before:
             Color:
-                rgba: (0.95, 0.95, 0.95, 1)
+                rgba: (0.07, 0.09, 0.13, 1)
             Rectangle:
                 pos: self.pos
                 size: self.size
 
+        # Header
         BoxLayout:
             size_hint_y: None
-            height: '65dp'
-            padding: [dp(10), 0]
+            height: dp(65)
+            padding: [dp(8), dp(10), dp(8), dp(10)]
+            spacing: dp(4)
             canvas.before:
                 Color:
-                    rgba: (0.18, 0.49, 0.2, 1)
+                    rgba: (0.10, 0.13, 0.19, 1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                Color:
+                    rgba: (0.22, 0.58, 0.27, 1)
+                Rectangle:
+                    pos: (self.x, self.y)
+                    size: (self.width, dp(2))
+
             Button:
-                text: '<'
+                text: '‹'
                 size_hint_x: None
-                width: '50dp'
+                width: dp(44)
                 background_normal: ''
                 background_color: (0, 0, 0, 0)
-                font_size: '22sp'
+                font_size: '28sp'
+                color: (0.60, 0.65, 0.75, 1)
                 on_release: root.back()
+
             Label:
-                text: 'Details'
+                text: 'Customer Details'
                 bold: True
-                font_size: '20sp'
+                font_size: '19sp'
+                color: (0.92, 0.94, 0.97, 1)
+                halign: 'left'
+                text_size: self.width, None
+
             Button:
                 id: edit_toggle_btn
                 text: 'EDIT'
                 size_hint_x: None
-                width: '80dp'
+                width: dp(70)
                 background_normal: ''
                 background_color: (0, 0, 0, 0)
+                font_size: '13sp'
+                bold: True
+                color: (0.30, 0.75, 0.38, 1)
                 on_release: root.toggle_edit_mode()
 
         ScrollView:
+            bar_width: dp(3)
+            bar_color: (0.22, 0.58, 0.27, 0.4)
+            bar_inactive_color: (0.22, 0.58, 0.27, 0.1)
+
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
                 height: self.minimum_height
-                padding: dp(15)
-                spacing: dp(15)
+                padding: [dp(16), dp(20), dp(16), dp(30)]
+                spacing: dp(14)
 
-                TextInput:
-                    id: name_input
-                    hint_text: 'Name of the person who has a debt/order'
-                    size_hint_y: None
-                    height: dp(50)
-                    multiline: False
-                    padding: [dp(12), dp(12)]
-                
+                # --- Customer Info Card ---
                 BoxLayout:
+                    orientation: 'vertical'
                     size_hint_y: None
-                    height: dp(50)
-                    spacing: dp(10)
-                    TextInput:
-                        id: phone_input
-                        hint_text: 'Enter Phone number (Optional)'
-                        multiline: False
-                        input_filter: 'int'
-                        padding: [dp(12), dp(12)]
-                    Button:
-                        text: 'CALL'
-                        size_hint_x: None
-                        width: dp(80)
-                        background_normal: ''
-                        background_color: (0.2, 0.6, 0.2, 1) if self.state == 'normal' else (0.1, 0.4, 0.1, 1)
-                        bold: True
-                        on_release: root.call_customer()
-                
-                TextInput:
-                    id: address_input
-                    hint_text: 'Address'
-                    size_hint_y: None
-                    height: dp(50)
-                    multiline: False
-                    padding: [dp(12), dp(12)]
+                    height: self.minimum_height
+                    padding: dp(18)
+                    spacing: dp(12)
+                    canvas.before:
+                        Color:
+                            rgba: (0.11, 0.15, 0.21, 1)
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(14),]
+                        Color:
+                            rgba: (0.22, 0.58, 0.27, 1)
+                        RoundedRectangle:
+                            pos: (self.x, self.y + self.height - dp(3))
+                            size: (self.width * 0.3, dp(3))
+                            radius: [dp(14), dp(14), 0, 0]
 
+                    Label:
+                        text: 'CUSTOMER INFORMATION'
+                        font_size: '10sp'
+                        bold: True
+                        color: (0.30, 0.75, 0.38, 1)
+                        halign: 'left'
+                        text_size: self.width, None
+                        size_hint_y: None
+                        height: dp(20)
+
+                    TextInput:
+                        id: name_input
+                        hint_text: 'Full Name'
+                        size_hint_y: None
+                        height: dp(48)
+                        multiline: False
+                        padding: [dp(14), dp(14)]
+                        background_normal: ''
+                        background_color: (0.07, 0.09, 0.14, 1)
+                        foreground_color: (0.92, 0.94, 0.97, 1)
+                        disabled_foreground_color: (0.92, 0.94, 0.97, 1)
+                        hint_text_color: (0.35, 0.42, 0.52, 1)
+                        cursor_color: (0.22, 0.58, 0.27, 1)
+                        font_size: '15sp'
+                        canvas.after:
+                            Color:
+                                rgba: (0.20, 0.26, 0.36, 1)
+                            Line:
+                                rounded_rectangle: (self.x, self.y, self.width, self.height, dp(8))
+                                width: dp(1)
+
+                    BoxLayout:
+                        size_hint_y: None
+                        height: dp(48)
+                        spacing: dp(10)
+
+                        TextInput:
+                            id: phone_input
+                            hint_text: 'Phone Number'
+                            multiline: False
+                            input_filter: 'int'
+                            padding: [dp(14), dp(14)]
+                            background_normal: ''
+                            background_color: (0.07, 0.09, 0.14, 1)
+                            foreground_color: (0.92, 0.94, 0.97, 1)
+                            disabled_foreground_color: (0.92, 0.94, 0.97, 1)
+                            hint_text_color: (0.35, 0.42, 0.52, 1)
+                            cursor_color: (0.22, 0.58, 0.27, 1)
+                            font_size: '14sp'
+                            canvas.after:
+                                Color:
+                                    rgba: (0.20, 0.26, 0.36, 1)
+                                Line:
+                                    rounded_rectangle: (self.x, self.y, self.width, self.height, dp(8))
+                                    width: dp(1)
+
+                        Button:
+                            text: 'CALL'
+                            size_hint_x: None
+                            width: dp(72)
+                            background_normal: ''
+                            background_color: (0, 0, 0, 0)
+                            bold: True
+                            font_size: '13sp'
+                            color: (1, 1, 1, 1)
+                            on_release: root.call_customer()
+                            canvas.before:
+                                Color:
+                                    rgba: (0.14, 0.40, 0.18, 1) if self.state == 'normal' else (0.10, 0.30, 0.13, 1)
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [dp(8),]
+
+                    TextInput:
+                        id: address_input
+                        hint_text: 'Address'
+                        size_hint_y: None
+                        height: dp(48)
+                        multiline: False
+                        padding: [dp(14), dp(14)]
+                        background_normal: ''
+                        background_color: (0.07, 0.09, 0.14, 1)
+                        foreground_color: (0.92, 0.94, 0.97, 1)
+                        disabled_foreground_color: (0.92, 0.94, 0.97, 1)
+                        hint_text_color: (0.35, 0.42, 0.52, 1)
+                        cursor_color: (0.22, 0.58, 0.27, 1)
+                        font_size: '14sp'
+                        canvas.after:
+                            Color:
+                                rgba: (0.20, 0.26, 0.36, 1)
+                            Line:
+                                rounded_rectangle: (self.x, self.y, self.width, self.height, dp(8))
+                                width: dp(1)
+
+                # --- Edit Actions (Save / Delete) ---
                 BoxLayout:
                     id: edit_actions
                     size_hint_y: None
                     height: 0
                     opacity: 0
                     spacing: dp(10)
-                    Button:
-                        text: 'DELETE'
-                        background_normal: ''
-                        background_color: (0.8, 0.2, 0.2, 1)
-                        on_release: root.delete_customer()
-                    Button:
-                        text: 'SAVE'
-                        background_normal: ''
-                        background_color: (0.18, 0.49, 0.2, 1)
-                        on_release: root.update_customer_info()
 
+                    Button:
+                        text: 'DELETE CUSTOMER'
+                        background_normal: ''
+                        background_color: (0, 0, 0, 0)
+                        bold: True
+                        font_size: '13sp'
+                        color: (0.90, 0.35, 0.35, 1)
+                        on_release: root.delete_customer()
+                        canvas.before:
+                            Color:
+                                rgba: (0.30, 0.10, 0.10, 1) if self.state == 'normal' else (0.40, 0.14, 0.14, 1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [dp(10),]
+
+                    Button:
+                        text: 'SAVE CHANGES'
+                        background_normal: ''
+                        background_color: (0, 0, 0, 0)
+                        bold: True
+                        font_size: '13sp'
+                        color: (1, 1, 1, 1)
+                        on_release: root.update_customer_info()
+                        canvas.before:
+                            Color:
+                                rgba: (0.18, 0.48, 0.22, 1) if self.state == 'normal' else (0.13, 0.35, 0.16, 1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [dp(10),]
+
+                # --- Add New Debt Section (Visible only if balance > 0) ---
                 BoxLayout:
                     id: new_order_section
                     orientation: 'vertical'
                     size_hint_y: None
-                    height: dp(230)
+                    height: dp(240) if balance_label.text != 'BALANCE: ₱0.00' else 0
+                    opacity: 1 if self.height > 0 else 0
+                    disabled: True if self.height == 0 else False
                     spacing: dp(10)
+                    padding: dp(18) if self.height > 0 else 0
                     canvas.before:
                         Color:
-                            rgba: (0.9, 0.9, 0.9, 1)
+                            rgba: (0.11, 0.15, 0.21, 1) if self.height > 0 else (0,0,0,0)
                         RoundedRectangle:
                             pos: self.pos
                             size: self.size
-                            radius: [dp(10),]
-                    padding: dp(15)
+                            radius: [dp(14),]
+
                     Label:
                         text: 'ADD NEW DEBT / ORDER'
-                        color: (0.2, 0.2, 0.2, 1)
+                        font_size: '10sp'
                         bold: True
+                        color: (0.80, 0.55, 0.20, 1)
+                        halign: 'left'
+                        text_size: self.width, None
                         size_hint_y: None
-                        height: dp(30)
+                        height: dp(20) if root.ids.new_order_section.height > 0 else 0
+
                     TextInput:
                         id: order_desc
                         hint_text: 'Description'
                         size_hint_y: None
-                        height: dp(45)
+                        height: dp(46) if root.ids.new_order_section.height > 0 else 0
+                        padding: [dp(14), dp(14)]
+                        background_color: (0.07, 0.09, 0.14, 1)
+                        foreground_color: (0.92, 0.94, 0.97, 1)
+
                     TextInput:
                         id: order_total
-                        hint_text: 'Amount (₱)'
+                        hint_text: 'Amount ₱'
                         input_filter: 'float'
                         size_hint_y: None
-                        height: dp(45)
+                        height: dp(46) if root.ids.new_order_section.height > 0 else 0
+                        padding: [dp(14), dp(14)]
+                        background_color: (0.07, 0.09, 0.14, 1)
+                        foreground_color: (0.92, 0.94, 0.97, 1)
+
                     Button:
                         text: 'CONFIRM DEBT / ORDER'
                         size_hint_y: None
-                        height: dp(50)
-                        background_normal: ''
-                        background_color: (0.18, 0.49, 0.2, 1) if self.state == 'normal' else (0.1, 0.3, 0.1, 1)
+                        height: dp(50) if root.ids.new_order_section.height > 0 else 0
                         on_release: root.add_order()
+                        canvas.before:
+                            Color:
+                                rgba: (0.50, 0.30, 0.06, 1) if self.state == 'normal' else (0.38, 0.22, 0.04, 1)
+                            RoundedRectangle:
+                                pos: self.pos
+                                size: self.size
+                                radius: [dp(10),]
 
-                Label:
-                    id: history_label
-                    markup: True
-                    color: (0.2, 0.2, 0.2, 1)
+                # --- Transaction History Card (Visible only if balance > 0) ---
+                BoxLayout:
+                    orientation: 'vertical'
                     size_hint_y: None
-                    height: self.texture_size[1]
-                    halign: 'left'
-                    valign: 'top'
-                    text_size: self.width, None
+                    height: self.minimum_height if balance_label.text != 'BALANCE: ₱0.00' else 0
+                    opacity: 1 if self.height > 0 else 0
+                    disabled: True if self.height == 0 else False
+                    padding: [dp(18), dp(16)] if self.height > 0 else 0
+                    spacing: dp(8)
+                    canvas.before:
+                        Color:
+                            rgba: (0.09, 0.12, 0.17, 1) if self.height > 0 else (0,0,0,0)
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [dp(14),]
+
+                    Label:
+                        text: 'TRANSACTION HISTORY'
+                        font_size: '10sp'
+                        bold: True
+                        color: (0.40, 0.48, 0.60, 1)
+                        halign: 'left'
+                        text_size: self.width, None
+                        size_hint_y: None
+                        height: dp(20) if self.parent.height > 0 else 0
+
+                    BoxLayout:
+                        id: history_container
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: dp(4)
+
+                    Label:
+                        id: balance_label
+                        text: 'BALANCE: ₱0.00'
+                        bold: True
+                        font_size: '16sp'
+                        color: (0.30, 0.75, 0.38, 1)
+                        size_hint_y: None
+                        height: dp(40) if self.parent.height > 0 else 0
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.width, None
