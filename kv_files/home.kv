@@ -3,54 +3,123 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: dp(20)
-        spacing: dp(20)
         canvas.before:
             Color:
-                rgba: (0.95, 0.95, 0.95, 1)
+                rgba: (0.07, 0.09, 0.13, 1)
             Rectangle:
                 pos: self.pos
                 size: self.size
+            Color:
+                rgba: (0.12, 0.16, 0.22, 1)
+            Ellipse:
+                pos: (-self.width * 0.3, self.height * 0.5)
+                size: (self.width * 1.0, self.height * 0.7)
 
+        # Top spacer to center the logo better
+        Widget:
+            size_hint_y: None
+            height: dp(60)
+
+        # Logo area
         BoxLayout:
-            size_hint_y: 0.5 
+            size_hint_y: None
+            height: dp(180)
+            padding: [dp(60), 0]
             Image:
                 source: 'assets/logo.png'
                 allow_stretch: True
                 keep_ratio: True
 
+        # Tagline - Fixed height and alignment
+        Label:
+            size_hint_y: None
+            height: dp(40)
+            text: 'DEBT MANAGEMENT SYSTEM'
+            font_size: '11sp'
+            bold: True
+            color: (0.4, 0.75, 0.45, 1)
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.width, None
+            letter_spacing: '3sp'
+
+        # Spacer to prevent text overlap with the green button
+        Widget:
+            size_hint_y: None
+            height: dp(40)
+
+        # Buttons Container
         BoxLayout:
             orientation: 'vertical'
-            size_hint_y: 0.5
-            spacing: dp(12)
-            padding: [dp(20), 0]
+            size_hint_y: None
+            height: self.minimum_height
+            padding: [dp(28), 0]
+            spacing: dp(16)
 
             Button:
-                text: 'ADD NEW CUSTOMER'
+                text: '+ ADD NEW CUSTOMER'
                 size_hint_y: None
-                height: '60dp'
+                height: dp(58)
                 background_normal: ''
-                background_color: (0.18, 0.49, 0.2, 1)
-                font_size: '18sp'
+                background_color: (0, 0, 0, 0)
+                font_size: '15sp'
                 bold: True
                 on_release: root.add_new_debt()
+                canvas.before:
+                    Color:
+                        rgba: (0.22, 0.58, 0.27, 1) if self.state == 'normal' else (0.16, 0.44, 0.20, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10),]
 
             Button:
                 text: 'VIEW ACTIVE DEBTS'
                 size_hint_y: None
-                height: '60dp'
+                height: dp(58)
                 background_normal: ''
-                background_color: (0.2, 0.2, 0.2, 1)
-                font_size: '18sp'
+                background_color: (0, 0, 0, 0)
+                font_size: '15sp'
                 bold: True
                 on_release: root.show_debts()
+                canvas.before:
+                    Color:
+                        rgba: (0.16, 0.21, 0.30, 1) if self.state == 'normal' else (0.20, 0.26, 0.37, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10),]
+                    Color:
+                        rgba: (0.22, 0.58, 0.27, 1)
+                    Line:
+                        rounded_rectangle: (self.x, self.y, self.width, self.height, dp(10))
+                        width: dp(1.2)
 
             Button:
-                text: 'HISTORY'
+                text: 'PAYMENT HISTORY'
                 size_hint_y: None
-                height: '60dp'
+                height: dp(58)
                 background_normal: ''
-                background_color: (0.4, 0.4, 0.4, 1)
-                font_size: '18sp'
+                background_color: (0, 0, 0, 0)
+                font_size: '15sp'
                 bold: True
+                color: (0.55, 0.60, 0.68, 1)
                 on_release: root.manager.current = 'paidhistory'
+                canvas.before:
+                    Color:
+                        rgba: (0.12, 0.15, 0.21, 1) if self.state == 'normal' else (0.16, 0.20, 0.28, 1)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [dp(10),]
+
+        # Push footer to the very bottom
+        Widget:
+            size_hint_y: 1
+
+        Label:
+            size_hint_y: None
+            height: dp(40)
+            text: 'DEER © 2026'
+            font_size: '10sp'
+            color: (0.25, 0.30, 0.38, 1)
