@@ -12,14 +12,19 @@ package.domain = org.deloria
 source.dir = .
 
 # (list) List of inclusions using pattern matching
-source.include_exts = py,png,jpg,kv,json
+# Added 'txt' to include your requirements.txt just in case
+source.include_exts = py,png,jpg,kv,json,txt
+
+# (list) List of directory to include
+# Added 'kv_files' so your UI logic isn't missing!
+source.include_dirs = assets, kv_files
 
 # (str) Application version
 version = 0.1
 
 # (list) Application requirements
-# Note: sqlite3 is usually built-in, but including it here for safety.
-requirements = python3,kivy==2.3.0,hostpython3,setuptools
+# Added 'android' for system integration
+requirements = python3,kivy==2.3.0,hostpython3,setuptools,android
 
 # (str) Custom source folders for requirements
 # (list) Garden requirements
@@ -40,13 +45,13 @@ fullscreen = 0
 # --- Android specific ---
 
 [android]
-# (list) Permissions (COMBINED INTO ONE LINE)
-android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+# (list) Permissions (Included CALL_PHONE for your Call button)
+android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE, CALL_PHONE
 
-# (int) Target Android API, should be as high as possible.
+# (int) Target Android API
 android.api = 34
 
-# (int) Minimum API your APK will support.
+# (int) Minimum API your APK will support
 android.minapi = 21
 
 # (int) Android SDK version to use
@@ -58,28 +63,14 @@ android.ndk = 26b
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
 
-# (str) Android NDK directory (if empty, it will be automatically downloaded)
-#android.ndk_path =
-
-# (str) Android SDK directory (if empty, it will be automatically downloaded)
-#android.sdk_path =
-
-# (str) ANT directory (if empty, it will be automatically downloaded)
-#android.ant_path =
-
-# (bool) If True, then skip trying to update the Android sdk
-# This can be useful to avoid any automated update while building apk
-android.skip_update = False
-
 # (bool) If True, then automatically accept SDK license
-# agreements. This is intended for automation only.
 android.accept_sdk_license = True
 
 # (str) Android entry point, default is main.py
 android.entrypoint = main.py
 
-# (list) Android architectures to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = arm64-v8a
+# (list) Android architectures to build for (Added armeabi-v7a for wider compatibility)
+android.archs = arm64-v8a, armeabi-v7a
 
 # (bool) Allow backup of app data
 android.allow_backup = True
@@ -92,9 +83,3 @@ log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = off, 1 = on)
 warn_on_root = 0
-
-# (str) Path to build artifacts (default is ./.buildozer)
-#build_dir = ./.buildozer
-
-# (str) Path to bin directory (default is ./bin)
-#bin_dir = ./bin
